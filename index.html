@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HamsterParadise 🐹 - El rincón feliz de tu pequeño amigo</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            hamster: {
+              50: '#fcf8f2',
+              100: '#f6ebd9',
+              200: '#ebd4b1',
+              300: '#dfb77e',
+              400: '#d3994f',
+              500: '#c5802c',
+              600: '#a66522',
+              700: '#844f1c',
+              800: '#6b3f1b',
+              900: '#583419',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts Inter & Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
+    }
+    @keyframes wheelSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .animate-float { animation: float 4s ease-in-out infinite; }
+    .animate-float-delayed { animation: float 5s ease-in-out 2s infinite; }
+    .wheel-spin { animation: wheelSpin 8s linear infinite; }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+  </style>
+</head>
+<body class="bg-hamster-50 text-neutral-800 antialiased selection:bg-hamster-300 selection:text-hamster-900">
+
+
+
+  <!-- 1. BARRA DE NAVEGACIÓN FIJA (STICKY) -->
+
+  <header x-data="{ mobileMenuOpen: false }" class="sticky top-0 z-50 glass-card border-b border-hamster-200 shadow-sm transition-all duration-300">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
+      <!-- Logo con hámster animado -->
+
+      <a href="#" class="flex items-center gap-3 group">
+
+        <div class="w-12 h-12 bg-gradient-to-tr from-hamster-400 to-hamster-300 rounded-full flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+
+          <i class="fa-solid fa-paw text-white text-xl animate-bounce"></i>
+
+        </div>
+
+        <div>
+
+          <span class="text-2xl font-extrabold text-hamster-800 tracking-tight">Hamster<span class="text-hamster-500">Paradise</span></span>
+
+          <span class="block text-xs font-medium text-hamster-600 -mt-1">¡Un mundo de alegría peluda!</span>
+
+        </div>
+
+      </a>
+
+
+
+      <!-- Enlaces de navegación desktop -->
+
+      <nav class="hidden md:flex items-center gap-8 font-medium text-neutral-600">
+
+        <a href="#razas" class="hover:text-hamster-600 transition-colors">Razas</a>
+
+        <a href="#calculadora" class="hover:text-hamster-600 transition-colors">Calculadora Hábitat</a>
+
+        <a href="#cuidados" class="hover:text-hamster-600 transition-colors">Guía de Cuidados</a>
+
+        <a href="#consejos" class="hover:text-hamster-600 transition-colors">Curiosidades</a>
+
+      </nav>
+
+
+
+      <!-- Botón de adopción CTA -->
+
+      <div class="hidden md:flex items-center gap-4">
+
+        <a href="#calculadora" class="bg-gradient-to-r from-hamster-500 to-hamster-600 hover:from-hamster-600 hover:to-hamster-700 text-white font-semibold px-6 py-3 rounded-full shadow-lg shadow-hamster-500/30 hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center gap-2">
+
+          <i class="fa-solid fa-heart text-sm"></i>
+
+          <span>Adoptar Amigo</span>
+
+        </a>
+
+      </div>
+
+
+
+      <!-- Botón Menú Móvil -->
+
+      <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-neutral-700 focus:outline-none p-2 rounded-lg hover:bg-hamster-100 transition-colors">
+
+        <i :class="mobileMenuOpen ? 'fa-solid fa-xmark text-2xl' : 'fa-solid fa-bars text-2xl'"></i>
+
+      </button>
+
+    </div>
+
+
+
+    <!-- Menú desplegable móvil -->
+
+    <div x-show="mobileMenuOpen" x-transition class="md:hidden glass-card border-b border-hamster-200 px-6 py-4 space-y-3">
+
+      <a @click="mobileMenuOpen = false" href="#razas" class="block font-medium text-neutral-700 hover:text-hamster-600 py-2">Razas</a>
+
+      <a @click="mobileMenuOpen = false" href="#calculadora" class="block font-medium text-neutral-700 hover:text-hamster-600 py-2">Calculadora Hábitat</a>
+
+      <a @click="mobileMenuOpen = false" href="#cuidados" class="block font-medium text-neutral-700 hover:text-hamster-600 py-2">Guía de Cuidados</a>
+
+      <a @click="mobileMenuOpen = false" href="#consejos" class="block font-medium text-neutral-700 hover:text-hamster-600 py-2">Curiosidades</a>
+
+      <div class="pt-2">
+
+        <a @click="mobileMenuOpen = false" href="#calculadora" class="w-full block text-center bg-hamster-500 text-white font-semibold py-3 rounded-xl shadow-md">
+
+          Adoptar Amigo
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- 2. SECCIÓN HERO -->
+
+  <section class="relative overflow-hidden py-16 lg:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
+
+    <!-- Fondo decorativo difuminado -->
+
+    <div class="absolute -top-24 -left-24 w-96 h-96 bg-hamster-200/50 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="absolute top-1/2 right-0 w-80 h-80 bg-amber-200/40 rounded-full blur-3xl pointer-events-none"></div>
+
+
+
+    <!-- Texto principal -->
+
+    <div class="flex-1 space-y-6 text-center lg:text-left z-10">
+
+      <div class="inline-flex items-center gap-2 bg-hamster-100 text-hamster-800 px-4 py-2 rounded-full text-sm font-semibold tracking-wide border border-hamster-200 shadow-sm">
+
+        <i class="fa-solid fa-sun text-amber-500 animate-spin wheel-spin"></i>
+
+        <span>El paraíso para roedores felices</span>
+
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900 tracking-tight leading-tight">
+
+        Dale a tu hámster una vida <span class="text-transparent bg-clip-text bg-gradient-to-r from-hamster-600 to-amber-600">extraordinaria</span>
+
+      </h1>
+
+      <p class="text-lg sm:text-xl text-neutral-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+
+        Descubre cómo consentir a tu pequeño compañero con el hábitat ideal, alimentación nutritiva y diversión sin fin. ¡Su felicidad es nuestra prioridad!
+
+      </p>
+
+      <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-4">
+
+        <a href="#calculadora" class="bg-gradient-to-r from-hamster-500 to-hamster-600 hover:from-hamster-600 hover:to-hamster-700 text-white font-bold text-lg px-8 py-4 rounded-2xl shadow-xl shadow-hamster-500/25 hover:scale-105 transition-all flex items-center justify-center gap-3">
+
+          <span>Conoce a tu nuevo amigo</span>
+
+          <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+        <a href="#cuidados" class="bg-white/80 hover:bg-white text-neutral-700 font-semibold text-lg px-8 py-4 rounded-2xl border border-hamster-200 shadow-sm hover:shadow transition-all flex items-center justify-center gap-2">
+
+          <i class="fa-solid fa-book-open text-hamster-500"></i>
+
+          <span>Guía de Cuidados</span>
+
+        </a>
+
+      </div>
+
+
+
+      <!-- Métricas rápidas -->
+
+      <div class="grid grid-cols-3 gap-4 pt-8 border-t border-hamster-200/60 max-w-lg mx-auto lg:mx-0">
+
+        <div>
+
+          <p class="text-2xl sm:text-3xl font-extrabold text-hamster-800">+15k</p>
+
+          <p class="text-xs sm:text-sm text-neutral-500">Hámsters felices</p>
+
+        </div>
+
+        <div>
+
+          <p class="text-2xl sm:text-3xl font-extrabold text-hamster-800">100%</p>
+
+          <p class="text-xs sm:text-sm text-neutral-500">Guías confiables</p>
+
+        </div>
+
+        <div>
+
+          <p class="text-2xl sm:text-3xl font-extrabold text-hamster-800">4.9★</p>
+
+          <p class="text-xs sm:text-sm text-neutral-500">Valoración comunidad</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Ilustración / Tarjetas flotantes interactivas -->
+
+    <div class="flex-1 relative w-full max-w-md lg:max-w-none flex justify-center z-10">
+
+      <div class="relative w-72 h-72 sm:w-96 sm:h-96 bg-gradient-to-tr from-hamster-200 to-amber-100 rounded-full flex items-center justify-center shadow-inner">
+
+        <!-- Rueda decorativa animada -->
+
+        <div class="absolute w-64 h-64 sm:w-80 sm:h-80 border-4 border-dashed border-hamster-400/60 rounded-full wheel-spin pointer-events-none"></div>
+
+        
+
+        <!-- Avatar central simulando hámster -->
+
+        <div class="w-44 h-44 sm:w-56 sm:h-56 bg-white rounded-3xl shadow-2xl flex flex-col items-center justify-center p-6 border-4 border-hamster-300 transform rotate-3 hover:rotate-0 transition-transform">
+
+          <img src="https://placehold.co/150x150/f6ebd9/a66522?text=🐹" alt="Hámster Feliz" class="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-2xl mb-2 shadow-md">
+
+          <span class="font-bold text-neutral-800 text-sm sm:text-base">¡Pipoca & Amigos!</span>
+
+          <span class="text-xs text-hamster-600 font-medium">Experto en semillas</span>
+
+        </div>
+
+
+
+        <!-- Tarjeta flotante 1: Semillas -->
+
+        <div class="absolute -top-4 -left-4 sm:left-4 glass-card p-4 rounded-2xl shadow-lg animate-float flex items-center gap-3">
+
+          <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center text-amber-600">
+
+            <i class="fa-solid fa-seedling text-lg"></i>
+
+          </div>
+
+          <div>
+
+            <p class="text-xs font-bold text-neutral-700">Dieta Saludable</p>
+
+            <p class="text-[10px] text-neutral-500">Semillas & Frescos</p>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Tarjeta flotante 2: Túneles y Diversión -->
+
+        <div class="absolute -bottom-4 -right-4 sm:right-4 glass-card p-4 rounded-2xl shadow-lg animate-float-delayed flex items-center gap-3">
+
+          <div class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600">
+
+            <i class="fa-solid fa-puzzle-piece text-lg"></i>
+
+          </div>
+
+          <div>
+
+            <p class="text-xs font-bold text-neutral-700">Entretenimiento</p>
+
+            <p class="text-[10px] text-neutral-500">Túneles y Ruedas</p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- 3. SECCIÓN: RAZAS POPULARES DE HÁMSTERS -->
+
+  <section id="razas" class="py-20 bg-white/60 border-y border-hamster-200/50">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+
+        <span class="text-hamster-600 font-bold tracking-wider uppercase text-xs bg-hamster-100 px-3 py-1 rounded-full border border-hamster-200">Variedad Encantadora</span>
+
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-neutral-900">Razas Populares de Hámsters</h2>
+
+        <p class="text-neutral-600 text-base sm:text-lg">Cada raza tiene su propia personalidad y necesidades únicas. Encuentra la que mejor se adapte a tu estilo de vida.</p>
+
+      </div>
+
+
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <!-- Raza 1: Sirio / Dorado -->
+
+        <div class="glass-card rounded-3xl p-6 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between group border border-hamster-200">
+
+          <div>
+
+            <div class="relative h-48 rounded-2xl overflow-hidden mb-6 bg-hamster-100">
+
+              <img src="https://placehold.co/400x300/ebd4b1/6b3f1b?text=Hamster+Sirio" alt="Hámster Sirio" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+
+              <span class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-hamster-800 text-xs font-bold px-3 py-1 rounded-full shadow">Solitario</span>
+
+            </div>
+
+            <h3 class="text-xl font-bold text-neutral-900 mb-2">Hámster Sirio</h3>
+
+            <p class="text-neutral-600 text-sm mb-4 leading-relaxed">También conocido como dorado. Es el más grande y sociable con humanos, pero estrictamente solitario con otros hámsters.</p>
+
+          </div>
+
+          <div class="space-y-3 pt-4 border-t border-neutral-200/60 text-xs">
+
+            <div class="flex justify-between items-center text-neutral-600">
+
+              <span class="font-medium">Nivel de Energía:</span>
+
+              <div class="flex gap-1 text-amber-500">
+
+                <i class="fa-solid fa-bolt"></i><i class="fa-solid fa-bolt"></i><i class="fa-solid fa-bolt"></i><i class="fa-solid fa-bolt text-neutral-300"></i><i class="fa-solid fa-bolt text-neutral-300"></i>
+
+              </div>
+
+            </div>
+
+            <div class="flex justify-between items-center text-neutral-600">
+
+              <span class="font-medium">Tamaño ideal:</span>
+
+              <span class="font-bold text-neutral-800">15 - 18 cm</span>
+
+            </div>
+
+            <div class="flex justify-between items-center text-neutral-600">
+
+              <span class="font-medium">Carácter:</span>
+
+              <span class="font-bold text-hamster-700">Tranquilo y dócil</span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Raza 2: Roborovski -->
+
+        <div class="glass-card rounded-3xl p-6 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between group border border-hamster-200">
+
+          <div>
+
+            <div class="relative h-48 rounded-2xl overflow-hidden mb-6 bg-hamster-100">
+
+              <img src="https://placehold.co/400x300/f6ebd9/844f1c?text=Roborovski" alt="Hámster Roborovski" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+
+              <span class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-hamster-800 text-xs font-bold px-3 py-1 rounded-full shadow">Muy Rápido</span>
+
+            </div>
+
+            <h3 class="text-xl font-bold text-neutral-900 mb-2">Hámster Roborovski</h3>
+
+            <p class="text-neutral-600 text-sm mb-4 leading-relaxed">El más pequeño y veloz de todos. Sus cejas blancas y carita curiosa los hacen irresistibles, ideales para observación.</p>
+
+          </div>
+
+          <div class="space-y-3 pt-4 border-t border-neutral-200/60 text-xs">
+
+            <div class="flex justify-between items-center text-neutral-600">
+
+              <span class="font-medium">Nivel de Energía:</span>
+
+              <div class="flex gap-1 text-amber-500">
+
+                <i class="fa-solid fa-bolt"></i><i class="fa-solid fa-bolt"></i><i class="fa-solid fa-bolt"></i><i class="fa-solid fa-bolt"></i><i class="fa-solid fa-bolt"></i>
+
+              </div>
+
+            </div>
+
+            <div class="flex justify-between items-center text-neutral-600">
+
+              <span class="font-medium">Tamaño ideal:</span>
+
+              <span class="font-bold text-neutral-800">4 - 5 cm</span>
+
+            </div>
+
+            <div class="flex justify-between items-center text-neutral-600">
+
+              <span class="font-medium">Carácter:</span>
+
+              <span class="font-bold text-hamster-700">Activo y veloz</span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Raza 3: Ruso / Campbell -->
+
+        <div class="glass-card rounded-3xl p-6 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between group border border-hamster-200">
+
+          <div>
+
+            <div class="relative h-48 rounded-2xl overflow-hidden mb-6 bg-hamster-100">
+
+              <img src="https://placehold.co/400x300/dfb77e/583419?text=Hamster+Ruso" alt="Hámster Ruso" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+
+              <span class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-hamster-800 text-xs font-bold px-3 py-1 rounded-full shadow">Curioso</span>
+
+            </div>
+
+            <h3 class="text-xl font-bold text-neutral-900 mb-2">Hámster Ruso</h3>
+
+            <p class="text-neutral-600 text-sm mb-4 leading-relaxed">Reconocible por su línea dorsal oscura. Son amigables, disfrutan de la compañía humana con un poco de socialización constante.</p>
+
+          </div>
+
+          <div class="space-y-3 pt-4 border-t border-neutral-200/60 text-xs">
+
+            <div class="flex justify-between items-center text-neutral-600">
+
+              <span class="font-medium">Nivel de Energía:</span>
+
+              <div class="flex gap-1 text-amber-500">
+
+                <i class="fa-solid fa-bolt"></i><i class="fa-solid fa-bolt"></i><i class="fa-solid fa-bolt"></i><i class="fa-solid fa-bolt"></i><i class="fa-solid fa-bolt text-neutral-300"></i>
+
+              </div>
+
+            </div>
+
+            <div class="flex justify-between items-center text-neutral-600">
+
+              <span class="font-medium">Tamaño ideal:</span>
+
+              <span class="font-bold text-neutral-800">8 - 10 cm</span>
+
+            </div>
+
+            <div class="flex justify-between items-center text-neutral-600">
+
+              <span class="font-medium">Carácter:</span>
+
+              <span class="font-bold text-hamster-700">Sociable y curioso</span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Raza 4: Chino -->
+
+        <div class="glass-card rounded-3xl p-6 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between group border border-hamster-200">
+
+          <div>
+
+            <div class="relative h-48 rounded-2xl overflow-hidden mb-6 bg-hamster-100">
+
+              <img src="https://placehold.co/400x300/ebd4b1/583419?text=Hamster+Chino" alt="Hámster Chino" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+
+              <span class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-hamster-800 text-xs font-bold px-3 py-1 rounded-full shadow">Ágil</span>
+
+            </div>
+
+            <h3 class="text-xl font-bold text-neutral-900 mb-2">Hámster Chino</h3>
+
+            <p class="text-neutral-600 text-sm mb-4 leading-relaxed">Cuerpo ligeramente más alargado y cola prensil pequeña. Excelente escalador y muy dócil al manipularlo con suavidad.</p>
+
+          </div>
+
+          <div class="space-y-3 pt-4 border-t border-neutral-200/60 text-xs">
+
+            <div class="flex justify-between items-center text-neutral-600">
+
+              <span class="font-medium">Nivel de Energía:</span>
+
+              <div class="flex gap-1 text-amber-500">
+
+                <i class="fa-solid fa-bolt"></i><i class="fa-solid fa-bolt"></i><i class="fa-solid fa-bolt"></i><i class="fa-solid fa-bolt text-neutral-300"></i><i class="fa-solid fa-bolt text-neutral-300"></i>
+
+              </div>
+
+            </div>
+
+            <div class="flex justify-between items-center text-neutral-600">
+
+              <span class="font-medium">Tamaño ideal:</span>
+
+              <span class="font-bold text-neutral-800">10 - 12 cm</span>
+
+            </div>
+
+            <div class="flex justify-between items-center text-neutral-600">
+
+              <span class="font-medium">Carácter:</span>
+
+              <span class="font-bold text-hamster-700">Tranquilo y ágil</span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- 4. SECCIÓN INTERACTIVA: CALCULADORA DE FELICIDAD DEL HÁMSTER / HÁBITAT IDEAL -->
+
+  <section id="calculadora" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
+
+    x-data="{
+
+      wheelSize: '28cm',
+
+      substrate: 'papel',
+
+      tunnels: '3',
+
+      treats: 'naturales',
+
+      get score() {
+
+        let pts = 0;
+
+        if (this.wheelSize === '28cm' || this.wheelSize === '30cm+') pts += 40;
+
+        else if (this.wheelSize === '20cm') pts += 20;
+
+        else pts += 5;
+
+
+
+        if (this.substrate === 'papel' || this.substrate === 'viruta_limpia') pts += 30;
+
+        else pts += 10;
+
+
+
+        if (parseInt(this.tunnels) >= 3) pts += 20;
+
+        else pts += 10;
+
+
+
+        if (this.treats === 'naturales') pts += 10;
+
+        else pts += 5;
+
+
+
+        return pts;
+
+      },
+
+      get statusMessage() {
+
+        if (this.score >= 90) return '¡Hábitat 5 Estrellas! Tu hámster vivirá como un rey 👑🐹';
+
+        if (this.score >= 70) return '¡Buen hábitat! Con pequeños ajustes será perfecto 👍';
+
+        return '¡Precaución! El hábitat necesita mejoras urgentes para evitar estrés ⚠️';
+
+      }
+
+    }">
+
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+
+      <span class="text-hamster-600 font-bold tracking-wider uppercase text-xs bg-hamster-100 px-3 py-1 rounded-full border border-hamster-200">Experiencia Interactiva</span>
+
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-neutral-900">Calculadora de Felicidad del Hábitat</h2>
+
+      <p class="text-neutral-600 text-base sm:text-lg">Configura los elementos de la jaula de tu hámster y descubre en tiempo real el índice de bienestar y felicidad de tu mascota.</p>
+
+    </div>
+
+
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+      <!-- Controles de Configuración (7 columnas) -->
+
+      <div class="lg:col-span-7 glass-card rounded-3xl p-6 sm:p-8 shadow-xl border border-hamster-200 space-y-6">
+
+        <!-- 1. Tamaño de Rueda -->
+
+        <div>
+
+          <label class="block text-sm font-bold text-neutral-800 mb-2">
+
+            <i class="fa-solid fa-circle-notch text-hamster-600 mr-2"></i>Tamaño de la Rueda (Evita problemas de espalda)
+
+          </label>
+
+          <div class="grid grid-cols-3 gap-3">
+
+            <button @click="wheelSize = '15cm'" :class="wheelSize === '15cm' ? 'bg-hamster-600 text-white shadow-md' : 'bg-white/80 text-neutral-700 hover:bg-hamster-100'" class="py-3 px-4 rounded-xl border border-hamster-200 font-semibold text-xs sm:text-sm transition-all">
+
+              Pequeña (15cm)
+
+            </button>
+
+            <button @click="wheelSize = '28cm'" :class="wheelSize === '28cm' ? 'bg-hamster-600 text-white shadow-md' : 'bg-white/80 text-neutral-700 hover:bg-hamster-100'" class="py-3 px-4 rounded-xl border border-hamster-200 font-semibold text-xs sm:text-sm transition-all">
+
+              Ideal (28cm)
+
+            </button>
+
+            <button @click="wheelSize = '30cm+'" :class="wheelSize === '30cm+' ? 'bg-hamster-600 text-white shadow-md' : 'bg-white/80 text-neutral-700 hover:bg-hamster-100'" class="py-3 px-4 rounded-xl border border-hamster-200 font-semibold text-xs sm:text-sm transition-all">
+
+              Gigante (30cm+)
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- 2. Sustrato o Lecho -->
+
+        <div>
+
+          <label class="block text-sm font-bold text-neutral-800 mb-2">
+
+            <i class="fa-solid fa-layer-group text-hamster-600 mr-2"></i>Tipo de Sustrato (Para excavar y hacer madrigueras)
+
+          </label>
+
+          <div class="grid grid-cols-2 gap-3">
+
+            <button @click="substrate = 'papel'" :class="substrate === 'papel' ? 'bg-hamster-600 text-white shadow-md' : 'bg-white/80 text-neutral-700 hover:bg-hamster-100'" class="py-3 px-4 rounded-xl border border-hamster-200 font-semibold text-xs sm:text-sm transition-all">
+
+              Celulosa / Papel sin polvo
+
+            </button>
+
+            <button @click="substrate = 'viruta_perfumada'" :class="substrate === 'viruta_perfumada' ? 'bg-hamster-600 text-white shadow-md' : 'bg-white/80 text-neutral-700 hover:bg-hamster-100'" class="py-3 px-4 rounded-xl border border-hamster-200 font-semibold text-xs sm:text-sm transition-all">
+
+              Viruta Perfumada (⚠️ Tóxico)
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- 3. Cantidad de Túneles y Escondites -->
+
+        <div>
+
+          <label class="block text-sm font-bold text-neutral-800 mb-2">
+
+            <i class="fa-solid fa-tunnel text-hamster-600 mr-2"></i>Túneles y Refugios disponibles
+
+          </label>
+
+          <div class="grid grid-cols-3 gap-3">
+
+            <button @click="tunnels = '1'" :class="tunnels === '1' ? 'bg-hamster-600 text-white shadow-md' : 'bg-white/80 text-neutral-700 hover:bg-hamster-100'" class="py-3 px-4 rounded-xl border border-hamster-200 font-semibold text-xs sm:text-sm transition-all">
+
+              1 Refugio básico
+
+            </button>
+
+            <button @click="tunnels = '3'" :class="tunnels === '3' ? 'bg-hamster-600 text-white shadow-md' : 'bg-white/80 text-neutral-700 hover:bg-hamster-100'" class="py-3 px-4 rounded-xl border border-hamster-200 font-semibold text-xs sm:text-sm transition-all">
+
+              3+ (Sistema de túneles)
+
+            </button>
+
+            <button @click="tunnels = '0'" :class="tunnels === '0' ? 'bg-hamster-600 text-white shadow-md' : 'bg-white/80 text-neutral-700 hover:bg-hamster-100'" class="py-3 px-4 rounded-xl border border-hamster-200 font-semibold text-xs sm:text-sm transition-all">
+
+              Ninguno
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- 4. Premios y Snacks -->
+
+        <div>
+
+          <label class="block text-sm font-bold text-neutral-800 mb-2">
+
+            <i class="fa-solid fa-cookie-bite text-hamster-600 mr-2"></i>Snacks y Premios habituales
+
+          </label>
+
+          <div class="grid grid-cols-2 gap-3">
+
+            <button @click="treats = 'naturales'" :class="treats === 'naturales' ? 'bg-hamster-600 text-white shadow-md' : 'bg-white/80 text-neutral-700 hover:bg-hamster-100'" class="py-3 px-4 rounded-xl border border-hamster-200 font-semibold text-xs sm:text-sm transition-all">
+
+              Semillas naturales y verduras
+
+            </button>
+
+            <button @click="treats = 'azucarados'" :class="treats === 'azucarados' ? 'bg-hamster-600 text-white shadow-md' : 'bg-white/80 text-neutral-700 hover:bg-hamster-100'" class="py-3 px-4 rounded-xl border border-hamster-200 font-semibold text-xs sm:text-sm transition-all">
+
+              Snacks comerciales con azúcar
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Panel de Resultados Dinámicos (5 columnas) -->
+
+      <div class="lg:col-span-5 bg-gradient-to-br from-hamster-800 to-hamster-900 rounded-3xl p-6 sm:p-8 text-white shadow-2xl flex flex-col justify-between relative overflow-hidden">
+
+        <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-hamster-600/20 rounded-full blur-2xl pointer-events-none"></div>
+
+
+
+        <div class="space-y-6 z-10">
+
+          <div class="flex items-center justify-between border-b border-hamster-700 pb-4">
+
+            <span class="text-sm font-semibold tracking-wider uppercase text-hamster-300">Puntuación de Bienestar</span>
+
+            <div class="w-10 h-10 rounded-full bg-hamster-700 flex items-center justify-center text-amber-400">
+
+              <i class="fa-solid fa-star text-lg"></i>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- Puntuación numérica -->
+
+          <div class="text-center py-6">
+
+            <div class="text-6xl sm:text-7xl font-extrabold tracking-tight" x-text="score + ' / 100'"></div>
+
+            <p class="text-hamster-200 text-sm mt-2 font-medium" x-text="statusMessage"></p>
+
+          </div>
+
+
+
+          <!-- Barra de progreso -->
+
+          <div class="w-full bg-hamster-950/60 h-4 rounded-full overflow-hidden p-0.5">
+
+            <div class="h-full bg-gradient-to-r from-amber-400 to-hamster-400 rounded-full transition-all duration-500" :style="`width: ${score}%`"></div>
+
+          </div>
+
+
+
+          <!-- Resumen de configuración -->
+
+          <div class="space-y-2 pt-2 text-xs sm:text-sm text-hamster-200">
+
+            <div class="flex justify-between">
+
+              <span>Rueda elegida:</span>
+
+              <span class="font-bold text-white" x-text="wheelSize"></span>
+
+            </div>
+
+            <div class="flex justify-between">
+
+              <span>Sustrato:</span>
+
+              <span class="font-bold text-white capitalize" x-text="substrate.replace('_', ' ')"></span>
+
+            </div>
+
+            <div class="flex justify-between">
+
+              <span>Túneles:</span>
+
+              <span class="font-bold text-white" x-text="tunnels"></span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="pt-8 z-10">
+
+          <a href="#cuidados" class="w-full bg-amber-500 hover:bg-amber-400 text-hamster-950 font-bold py-4 rounded-2xl text-center block shadow-lg hover:shadow-xl transition-all">
+
+            Mejorar el Hábitat de mi Hámster
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- 5. SECCIÓN DE CONSEJOS DE CUIDADO (ACORDEÓN INTERACTIVO) -->
+
+  <section id="cuidados" class="py-20 bg-white/60 border-y border-hamster-200/50">
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" x-data="{ activeTab: 1 }">
+
+      <div class="text-center mb-16 space-y-4">
+
+        <span class="text-hamster-600 font-bold tracking-wider uppercase text-xs bg-hamster-100 px-3 py-1 rounded-full border border-hamster-200">Guía Experta UI/UX</span>
+
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-neutral-900">Consejos Esenciales de Cuidado</h2>
+
+        <p class="text-neutral-600 text-base sm:text-lg">Todo lo que necesitas saber sobre dieta, higiene y entretenimiento para asegurar una vida longeva y saludable.</p>
+
+      </div>
+
+
+
+      <div class="space-y-4">
+
+        <!-- Pestaña 1: Dieta Nutritiva -->
+
+        <div class="glass-card rounded-2xl overflow-hidden border border-hamster-200 shadow-sm transition-all">
+
+          <button @click="activeTab = activeTab === 1 ? null : 1" class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none">
+
+            <div class="flex items-center gap-4">
+
+              <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl font-bold">
+
+                <i class="fa-solid fa-bowl-food"></i>
+
+              </div>
+
+              <div>
+
+                <h3 class="font-bold text-neutral-900 text-lg">1. Dieta y Nutrición Equilibrada</h3>
+
+                <p class="text-xs text-neutral-500">Semillas, pienso de calidad y vegetales frescos permitidos.</p>
+
+              </div>
+
+            </div>
+
+            <i :class="activeTab === 1 ? 'fa-solid fa-chevron-up text-hamster-600' : 'fa-solid fa-chevron-down text-neutral-400'"></i>
+
+          </button>
+
+          <div x-show="activeTab === 1" x-transition class="px-6 pb-6 text-neutral-600 text-sm leading-relaxed border-t border-hamster-100 pt-4 space-y-3">
+
+            <p>Los hámsters necesitan una mezcla base de semillas variadas y pienso extruido (evita mezclas con exceso de semillas de girasol por su alto contenido graso).</p>
+
+            <p><strong class="text-neutral-800">Vegetales permitidos (en pequeñas porciones):</strong> Brócoli, zanahoria, pepino y calabacín. Evita cítricos, cebolla y alimentos azucarados.</p>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Pestaña 2: Higiene y Limpieza -->
+
+        <div class="glass-card rounded-2xl overflow-hidden border border-hamster-200 shadow-sm transition-all">
+
+          <button @click="activeTab = activeTab === 2 ? null : 2" class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none">
+
+            <div class="flex items-center gap-4">
+
+              <div class="w-12 h-12 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center text-xl font-bold">
+
+                <i class="fa-solid fa-bath"></i>
+
+              </div>
+
+              <div>
+
+                <h3 class="font-bold text-neutral-900 text-lg">2. Higiene y Baño de Arena</h3>
+
+                <p class="text-xs text-neutral-500">Por qué nunca debes bañar a tu hámster con agua.</p>
+
+              </div>
+
+            </div>
+
+            <i :class="activeTab === 2 ? 'fa-solid fa-chevron-up text-hamster-600' : 'fa-solid fa-chevron-down text-neutral-400'"></i>
+
+          </button>
+
+          <div x-show="activeTab === 2" x-transition class="px-6 pb-6 text-neutral-600 text-sm leading-relaxed border-t border-hamster-100 pt-4 space-y-3">
+
+            <p>Los hámsters limpian su pelaje por sí mismos. <strong class="text-neutral-800">Nunca los bañes con agua</strong>, ya que destruye su capa protectora natural y puede causarles hipotermia o neumonía.</p>
+
+            <p>Coloca un recipiente con <strong class="text-neutral-800">arena especial para chinchillas o hámsters</strong> (sin polvo ni químicos) para que tomen baños de arena diarios y se mantengan impecables.</p>
+          </div>
+        </div>
+        <!-- Pestaña 3: Entretenimiento y Enriquecimiento -->
+
+        <div class="glass-card rounded-2xl overflow-hidden border border-hamster-200 shadow-sm transition-all">
+
+          <button @click="activeTab = activeTab === 3 ? null : 3" class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-hamster-200 text-hamster-800 flex items-center justify-center text-xl font-bold">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-neutral-900 text-lg">3. Entretenimiento y Ejercicio</h3>
+                <p class="text-xs text-neutral-500">Ruedas adecuadas, juguetes de madera y túneles.</p>
+              </div>
+            </div>
+            <i :class="activeTab === 3 ? 'fa-solid fa-chevron-up text-hamster-600' : 'fa-solid fa-chevron-down text-neutral-400'"></i>
+          </button>
+          <div x-show="activeTab === 3" x-transition class="px-6 pb-6 text-neutral-600 text-sm leading-relaxed border-t border-hamster-100 pt-4 space-y-3">
+            <p>Un hámster aburrido puede desarrollar conductas de estrés o morder los barrotes. Proporciónale una <strong class="text-neutral-800">rueda completamente lisa y sin agujeros</strong> para proteger su cola y columna.</p>
+            <p>Añade juguetes de madera de sauce, cartón sin tintas tóxicas y suficientes capas de sustrato profundo para fomentar su instinto natural de excavación.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- SECCIÓN DE CURIOSIDADES (BONUS) -->
+  <section id="consejos" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+      <span class="text-hamster-600 font-bold tracking-wider uppercase text-xs bg-hamster-100 px-3 py-1 rounded-full border border-hamster-200">¿Sabías qué?</span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-neutral-900">Curiosidades Felices</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="glass-card p-8 rounded-3xl shadow-lg border border-hamster-200 space-y-4 hover:-translate-y-1 transition-transform">
+        <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 text-2xl font-bold shadow-inner">
+          <i class="fa-solid fa-eye-slash"></i>
+        </div>
+        <h3 class="text-xl font-bold text-neutral-900">Visión Nocturna</h3>
+        <p class="text-neutral-600 text-sm leading-relaxed">Los hámsters tienen una vista muy pobre y son principalmente nocturnos o crepusculares. ¡Se orientan con sus largos bigotes y su agudo olfato!</p>
+      </div>
+      <div class="glass-card p-8 rounded-3xl shadow-lg border border-hamster-200 space-y-4 hover:-translate-y-1 transition-transform">
+        <div class="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center text-orange-600 text-2xl font-bold shadow-inner">
+          <i class="fa-solid fa-box-archive"></i>
+        </div>
+        <h3 class="text-xl font-bold text-neutral-900">Bolsas en las Mejillas</h3>
+        <p class="text-neutral-600 text-sm leading-relaxed">Sus abazones (bolsas en las mejillas) pueden expandirse hasta alcanzar el tamaño de todo su cuerpo para almacenar y transportar comida a su despensa secreta.</p>
+      </div>
+      <div class="glass-card p-8 rounded-3xl shadow-lg border border-hamster-200 space-y-4 hover:-translate-y-1 transition-transform">
+        <div class="w-14 h-14 bg-hamster-200 rounded-2xl flex items-center justify-center text-hamster-800 text-2xl font-bold shadow-inner">
+          <i class="fa-solid fa-gauge-high"></i>
+        </div>
+        <h3 class="text-xl font-bold text-neutral-900">Atletas Nocturnos</h3>
+        <p class="text-neutral-600 text-sm leading-relaxed">Un solo hámster puede correr el equivalente a <strong class="text-neutral-800">8 kilómetros en su rueda durante una sola noche</strong>. ¡Por eso la calidad de la rueda es vital!</p>
+      </div>
+    </div>
+  </section>
+  <!-- 6. PIE DE PÁGINA (FOOTER) CREATIVO Y DIVERTIDO -->
+
+  <footer class="bg-gradient-to-br from-hamster-900 to-hamster-950 text-white pt-16 pb-12 relative overflow-hidden">
+
+    <div class="absolute top-0 right-0 w-96 h-96 bg-hamster-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-hamster-800">
+
+        <div class="space-y-4 md:col-span-2">
+
+          <div class="flex items-center gap-3">
+
+            <div class="w-10 h-10 bg-hamster-500 rounded-full flex items-center justify-center text-white shadow-md">
+
+              <i class="fa-solid fa-paw"></i>
+
+            </div>
+
+            <span class="text-2xl font-extrabold tracking-tight">Hamster<span class="text-hamster-400">Paradise</span></span>
+
+          </div>
+
+          <p class="text-hamster-200 text-sm max-w-sm leading-relaxed">
+
+            Dedicados al bienestar, cuidado y felicidad de los pequeños roedores del hogar. Diseñado con amor y tecnología moderna por expertos UI/UX.
+
+          </p>
+
+          <div class="flex gap-4 pt-2">
+
+            <a href="#" class="w-10 h-10 rounded-full bg-hamster-800 hover:bg-hamster-600 flex items-center justify-center text-white transition-colors">
+
+              <i class="fa-brands fa-instagram"></i>
+
+            </a>
+
+            <a href="#" class="w-10 h-10 rounded-full bg-hamster-800 hover:bg-hamster-600 flex items-center justify-center text-white transition-colors">
+
+              <i class="fa-brands fa-tiktok"></i>
+
+            </a>
+
+            <a href="#" class="w-10 h-10 rounded-full bg-hamster-800 hover:bg-hamster-600 flex items-center justify-center text-white transition-colors">
+
+              <i class="fa-brands fa-youtube"></i>
+
+            </a>
+
+          </div>
+
+        </div>
+
+
+
+        <div>
+
+          <h4 class="font-bold text-white text-base mb-4">Enlaces Rápidos</h4>
+
+          <ul class="space-y-2 text-sm text-hamster-200">
+
+            <li><a href="#razas" class="hover:text-amber-400 transition-colors">Razas Populares</a></li>
+
+            <li><a href="#calculadora" class="hover:text-amber-400 transition-colors">Calculadora Hábitat</a></li>
+
+            <li><a href="#cuidados" class="hover:text-amber-400 transition-colors">Guía de Cuidados</a></li>
+
+            <li><a href="#consejos" class="hover:text-amber-400 transition-colors">Curiosidades</a></li>
+
+          </ul>
+
+        </div>
+
+
+
+        <div>
+
+          <h4 class="font-bold text-white text-base mb-4">Boletín Peludo 🐹</h4>
+
+          <p class="text-xs text-hamster-200 mb-3">Recibe consejos semanales y tips de cuidado directamente en tu correo.</p>
+
+          <form @submit.prevent="alert('¡Gracias por suscribirte al boletín peludo!');" class="space-y-2">
+
+            <input type="email" placeholder="tu.correo@ejemplo.com" required class="w-full px-4 py-2.5 rounded-xl bg-hamster-950 border border-hamster-700 text-white text-sm placeholder-hamster-400 focus:outline-none focus:border-amber-400">
+
+            <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-hamster-950 font-bold py-2.5 rounded-xl text-sm transition-colors shadow">
+
+              Suscribirme
+
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-hamster-400 gap-4">
+
+        <p>&copy; 2026 HamsterParadise. Todos los derechos reservados.</p>
+
+        <p class="flex items-center gap-1">
+
+          Hecho con <i class="fa-solid fa-heart text-amber-500 mx-1"></i> para amantes de los hámsters.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+
+</body>
+
+</html>
